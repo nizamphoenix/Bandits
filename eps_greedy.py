@@ -1,3 +1,5 @@
+from mab import MAB
+
 class EpsGreedy(MAB):
     """
     Epsilon-Greedy multi-armed bandit
