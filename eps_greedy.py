@@ -23,7 +23,7 @@ class EpsGreedy(MAB):
         self.Qvalues = np.full((narms,),Q0)#use infinity
     
 
-    #This should return an arm integer in {1, . . . , self.narms}
+    #This returns an arm integer in {1, . . . , self.narms}
     def play(self, tround, context=None):
         if np.random.random() > self.epsilon:#flipping a coin and chosing an arm at random
             return np.random.choice([i+1 for i, j in enumerate(self.Qvalues) if j == max(self.Qvalues)])
