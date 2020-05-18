@@ -28,11 +28,11 @@ class LinUCB(MAB):
         posterior = [0 for col in range(1, self.narms + 1)]
         context_matrix = context.reshape((self.ndims, self.ndims))
         for arm in range(1, self.narms + 1):
-            self.theta[arm - 1] = np.dot(inv(self.A[arm - 1]), self.b[arm - 1])# Updating coefficient vector for an arm
-            X = context_matrix[arm - 1].reshape((self.ndims, 1))# Calculating X for each arm which is (10x1) vector
-            stdev = np.math.sqrt(np.dot(np.dot(X.T , inv(self.A[arm - 1])) , X))#standard deviation
-            posterior[arm - 1] = (np.dot(self.theta[arm - 1].T ,X)) + self.alpha * stdev#updating posterior(our belief about an arm) which was initialized to zero
-        return np.random.choice([i for i, j in enumerate(posterior) if j == max(posterior)]) + 1#chosing an arm at random and breaking the ties if they occur
+            self.theta[arm - 1] = np.dot(inv(self.A[arm - 1]), self.b[arm - 1]) # Updating coefficient vector for an arm
+            X = context_matrix[arm - 1].reshape((self.ndims, 1)) # Calculating X for each arm which is (10x1) vector
+            stdev = np.math.sqrt(np.dot(np.dot(X.T , inv(self.A[arm - 1])) , X))  #standard deviation
+            posterior[arm - 1] = (np.dot(self.theta[arm - 1].T ,X)) + self.alpha * stdev  #updating posterior(our belief about an arm) which was initialized to zero
+        return np.random.choice([i for i, j in enumerate(posterior) if j == max(posterior)]) + 1  #chosing an arm at random and breaking the ties if they occur
 
     def update(self, arm, reward, context):
         context_matrix = context.reshape((self.ndims, self.ndims))#Reshaping the context of an event to ten(10,1) contexts, one for each arm.
